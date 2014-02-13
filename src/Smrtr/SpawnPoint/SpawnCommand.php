@@ -35,7 +35,8 @@ class SpawnCommand extends Command
         'app/config/phpSettings.ini',
         'app/config/routes.ini',
         'public/.htaccess',
-        'public/index.php'
+        'public/index.php',
+        'paths.php'
     );
 
     /**
