@@ -1,0 +1,31 @@
+{
+    "name": "smrtr/spawn-point",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "spawn",
+        "starter",
+        "routing",
+        "development"
+    ],
+    "authors": [
+        {
+            "name": "Joe Green",
+            "email": "joe.green@smrtr.co.uk",
+            "homepage": "http://smrtr.co.uk",
+            "role": "developer"
+        }
+    ],
+    "require": {
+        "hearstuk/zf1-component-config": "~1.1",
+        "symfony/http-foundation": "v2.3.4",
+        "symfony/console": "v2.3.6",
+        "symfony/process": "v2.3.7",
+        "smrtr/haltorouter": "1.4"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    }
+}
