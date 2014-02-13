@@ -1,12 +1,12 @@
 {
     "name": "smrtr/spawn-point",
+    "description": "A featherweight dispatch process enabling rapid development.",
     "type": "library",
     "license": "MIT",
     "keywords": [
         "spawn",
-        "starter",
-        "routing",
-        "development"
+        "haltorouter",
+        "httpfoundation"
     ],
     "bin": ["bin/spawn"],
     "authors": [
