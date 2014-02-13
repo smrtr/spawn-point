@@ -18,6 +18,16 @@ class SpawnCommand extends Command
     /**
      * @var array
      */
+    protected static $directories = array
+    (
+        'app',
+        'app/config',
+        'public'
+    );
+
+    /**
+     * @var array
+     */
     protected static $fixtures = array
     (
         'app/bootstrap.php',
@@ -48,10 +58,32 @@ class SpawnCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Checking fixtures...');
-
         $root_path = realpath(dirname(__FILE__).'/../../../../../..');
         $fixtures_path = realpath(dirname(__FILE__).'/../../../fixtures');
+
+        $output->writeln('Checking directories...');
+
+        foreach (self::$directories as $directory) {
+
+            if (is_dir($directory)) {
+
+                $output->writeln('<info>'.$directory.' already exists</info>');
+
+            } elseif (is_file($directory)) {
+
+                $output->writeln('<error>Cannot create directory '.$directory.'; file exists with the same name</error>');
+
+            } else {
+
+                if (mkdir($directory)) {
+                    $output->writeln('<info>Directory '.$directory.' created</info>');
+                } else {
+                    $output->writeln('<error>Failed to create directory '.$directory.'</error>');
+                }
+            }
+        }
+
+        $output->writeln('Checking fixtures...');
 
         foreach (self::$fixtures as $fixture) {
 
