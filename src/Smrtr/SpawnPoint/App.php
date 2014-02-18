@@ -79,6 +79,19 @@ class App
     {
         if (is_array($match)) {
 
+            // Check params
+
+            if (is_array($match['params']) && count($match['params'])) {
+
+                // Assign params to request object
+
+                foreach ($match['params'] as $key => $value) {
+                    $this->request->attributes->set($key, $value);
+                }
+            }
+
+            // Extract target
+
             list($controller, $action) = explode("@", $match['target'], 2);
 
             // Check controller
