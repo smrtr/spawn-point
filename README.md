@@ -74,9 +74,9 @@ In `src\Buzz\HomepageController.php`:
 
     <?php
     namespace Buzz;
-    use Smrtr\SpawnPoint\ControllerInterface;
+    use Smrtr\SpawnPoint\AbstractController;
 
-    class HomepageController implements ControllerInterface
+    class HomepageController extends AbstractController
     {
         public function homepage()
         {
@@ -84,6 +84,28 @@ In `src\Buzz\HomepageController.php`:
         }
     }
 
+### Request parameters
+
+##### 1. Add a parametrised route to your `app/config/routes.ini`:
+
+    user.route = "/user/[i:id]"
+    user.method = "GET"
+    user.hostgroup = "Public"
+    user.target = "\Buzz\UserController@user"
+
+##### 2. Retrieve the parameter from the request object in `src/Buzz/UserController.php`:
+
+    <?php
+    namespace Buzz;
+    use Smrtr\SpawnPoint\AbstractController;
+
+    class UserController extends AbstractController
+    {
+        public function user()
+        {
+            $id = (int) $this->getRoutedParam('id');
+        }
+    }
 
   [1]: http://symfony.com/doc/current/components/http_foundation/introduction.html
   [2]: http://resources.smrtr.co.uk/haltorouter
