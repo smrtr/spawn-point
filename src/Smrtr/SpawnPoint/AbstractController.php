@@ -39,4 +39,12 @@ abstract class AbstractController implements ControllerInterface
     {
         return $this->app->response;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoutedParam($key, $default = null)
+    {
+        return $this->getRequest()->attributes->get($key, $default);
+    }
 }
