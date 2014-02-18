@@ -11,7 +11,7 @@ From your project root:
 
  1. Require spawn-point with composer. Add `"smrtr/spawn-point": "~1.0"` to the `require` section of your `composer.json`.
  2. Run `composer update` to download the spawn-point library.
- 3. Run `vendor/bin spawn spawn` to create the required project files.
+ 3. Run `vendor/bin/spawn spawn` to create the required project files.
 
 ## Configuration
 
