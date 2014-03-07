@@ -109,7 +109,9 @@ class App
                     // Call action
 
                     try {
-                        $reflectionMethod->invoke($reflectionClass->newInstance(), $this);
+                        $controllerObj = $reflectionClass->newInstance();
+                        $controllerObj->setApp($this);
+                        $reflectionMethod->invoke($controllerObj);
                     }
                     catch (\Exception $e) {
                         $this->response->setStatusCode(500);
