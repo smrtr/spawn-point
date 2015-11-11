@@ -30,6 +30,11 @@ class App
     public $response;
 
     /**
+     * @var callable|null
+     */
+    public $errorHandler;
+
+    /**
      * @var App
      */
     private static $instance;
@@ -75,7 +80,7 @@ class App
      *
      * @return $this
      */
-    protected function dispatch($match)
+    public function dispatch($match)
     {
         if (is_array($match)) {
 
@@ -93,6 +98,8 @@ class App
             // Extract target
 
             list($controller, $action) = explode("@", $match['target'], 2);
+            $this->request->attributes->set('controller', $controller);
+            $this->request->attributes->set('action', $action);
 
             // Check controller
 
@@ -114,7 +121,18 @@ class App
                         $reflectionMethod->invoke($controllerObj);
                     }
                     catch (\Exception $e) {
-                        $this->response->setStatusCode(500);
+
+                        if ($this->errorHandler) {
+
+                            call_user_func(
+                                $this->errorHandler,
+                                $e,
+                                $this
+                            );
+
+                        } else {
+                            $this->response->setStatusCode(500);
+                        }
                     }
 
                     // Finished
